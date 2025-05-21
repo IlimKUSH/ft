@@ -1,0 +1,6 @@
+{
+  "chat": {
+    "placeholder": "Type your message...",
+    "loading": "Waiting for response..."
+  }
+} 
