@@ -4,12 +4,14 @@ import Link from "next/link";
 import {EllipsisVertical, MessageCircle, ShoppingCart} from "lucide-react";
 import {Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger} from "@/components/ui/sheet";
 import UserButton from "@/components/shared/header/user-button";
+import LocaleToggle from "@/components/shared/header/locale-toggle";
 
 const Menu = () => {
     return (
         <div className="flex justify-end gap-3">
             <nav className="hidden md:flex w-full max-w-xs gap-1">
                 <ModeToggle />
+                <LocaleToggle />
                 <Button asChild variant="ghost">
                     <Link href="/chat">
                         <MessageCircle /> Chat

@@ -1,9 +1,10 @@
+import {useTranslations} from "next-intl";
 
-const HomePage = async () => {
-	
+const HomePage = () => {
+	const t = useTranslations()
 	return (
 		<div>
-			hello
+			{t("Hello")}
 		</div>
 	);
 };
