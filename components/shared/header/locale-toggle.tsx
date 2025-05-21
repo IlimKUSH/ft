@@ -3,34 +3,16 @@
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {GlobeIcon} from "lucide-react";
-import {useEffect, useState} from "react";
-import {useRouter} from "next/navigation";
+import setLanguageValue from "@/hooks/set-language";
+import {useLocale} from "next-intl";
 
 const LocaleToggle = () => {
-	const router = useRouter();
-	const [locale, setLocale] = useState<string>("");
+	const locale = useLocale();
+	const locales = ['ru', 'en'];
 	
-	useEffect(() => {
-		const cookieLocale = document.cookie.split("; ").find((row) => row.startsWith("MYNEXTAPP_LOCALE="))?.split("=")[1];
-		
-		if (cookieLocale) {
-			setLocale(cookieLocale)
-		} else {
-			const browserLocale = navigator.language.slice(0, 2);
-			setLocale(browserLocale);
-			document.cookie = `MYNEXTAPP_LOCALE=${browserLocale};`;
-			router.refresh()
-		}
-		
-	}, [router]);
-	
-	const changeLocale = (locale: string) => {
-		setLocale(locale);
-		document.cookie = `MYNEXTAPP_LOCALE=${locale};`;
-		router.refresh()
-	}
-	
-	console.log(locale);
+	const handleLocaleSwitch = (newLocale: string) => {
+		setLanguageValue(newLocale);
+	};
 	
 	return (
 		<DropdownMenu>
@@ -39,16 +21,20 @@ const LocaleToggle = () => {
 					variant="ghost"
 					className="focus-visible:ring-0 focus-visible:ring-offset-0"
 				>
-					<GlobeIcon/>
+					{locale.toUpperCase()}
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
-				<DropdownMenuItem onClick={() => changeLocale("en")}>
-					English
-				</DropdownMenuItem>
-				<DropdownMenuItem onClick={() => changeLocale("ru")}>
-					Русский
-				</DropdownMenuItem>
+			<DropdownMenuContent className="min-w-0">
+				{locales.map((l) => (
+					<DropdownMenuItem
+						key={l}
+						onClick={() => handleLocaleSwitch(l)}
+						disabled={locale === l}
+						className="cursor-pointer"
+					>
+						{l.toUpperCase()}
+					</DropdownMenuItem>
+				))}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
