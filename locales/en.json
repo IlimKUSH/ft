@@ -26,5 +26,13 @@
   "ConfirmPassword": "Confirm Password",
   "CreatingAccount": "Creating Account...",
   "CreateAccount": "Create Account",
-  "AllRightsReserved": "All Rights Reserved"
+  "AllRightsReserved": "All Rights Reserved",
+  "Auth": {
+    "errors": {
+      "required": "Email and password are required",
+      "invalidCredentials": "Invalid email or password",
+      "fetchUserFailed": "Failed to fetch user data",
+      "internal": "An internal error occurred"
+    }
+  }
 } 

@@ -3,7 +3,6 @@
 import {signInFormSchema, signUpFormSchema} from "@/lib/validators";
 import {signIn, signOut} from "@/auth";
 import {isRedirectError} from "next/dist/client/components/redirect-error";
-import {formatErrors} from "@/lib/utils";
 
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
     try {
@@ -69,7 +68,7 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
             throw e;
         }
 
-        return { success: false, message: formatErrors(e) };
+        return { success: false, message: e };
     }
 }
 

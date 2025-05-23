@@ -5,61 +5,78 @@ import {Input} from "@/components/ui/input";
 import {SignInDefaultValues} from "@/lib/constants";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
-import {useActionState} from "react";
-import {signInWithCredentials} from "@/lib/actions/user.actions";
-import {useFormStatus} from "react-dom";
-import {useSearchParams} from "next/navigation";
-import { useTranslations } from "next-intl";
+import {useTranslations} from "next-intl";
+import {useAuth} from "@/app/hooks/use-auth";
+import {useState} from "react";
 
 const CredentialsSigninForm = () => {
-    const t = useTranslations()
-    const searchParams = useSearchParams()
-    const callbackUrl = searchParams.get("callbackUrl") ?? "/profile";
+    const t = useTranslations();
+    const { signIn } = useAuth();
+    const [error, setError] = useState<string>("");
 
-    const [data, action] = useActionState(signInWithCredentials, {
-        success: false,
-        message: ""
-    });
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setError("");
+        
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get("email") as string;
+        const password = formData.get("password") as string;
 
-    const SignInButton = () => {
-        const t = useTranslations()
-        const { pending } = useFormStatus()
+        try {
+            await signIn.mutateAsync({ email, password });
+        } catch (err) {
+            setError(err instanceof Error ? err.message : "An error occurred");
+        }
+    };
 
-        return <Button disabled={pending} className="w-full" variant="default">
-            { pending ? t("SigningIn") : t("SignIn") }
-        </Button>
-    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className="space-y-6">
+                <div>
+                    <Label htmlFor="email">{t("Email")}</Label>
+                    <Input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        required 
+                        autoComplete="email"
+                        defaultValue={SignInDefaultValues.email}
+                    />
+                </div>
+                <div>
+                    <Label htmlFor="password">{t("Password")}</Label>
+                    <Input 
+                        id="password" 
+                        name="password" 
+                        type="password" 
+                        required 
+                        autoComplete="password"
+                        defaultValue={SignInDefaultValues.password}
+                    />
+                </div>
+                <div>
+                    <Button 
+                        disabled={signIn.isPending} 
+                        className="w-full" 
+                        variant="default"
+                    >
+                        {signIn.isPending ? t("SigningIn") : t("SignIn")}
+                    </Button>
+                </div>
 
-    return <form action={action}>
-        <input type="hidden" name="callbackUrl" value={callbackUrl} />
-        <div className="space-y-6">
-            <div>
-                <Label htmlFor="email">{t("Email")}</Label>
-                <Input id="email" name="email" type="email" required autoComplete="email"
-                       defaultValue={SignInDefaultValues.email}/>
+                {error && (
+                    <div className="text-center text-destructive">{error}</div>
+                )}
+
+                <div className="text-sm text-center text-muted-foreground">
+                    {t("DontHaveAnAccount")}{" "}
+                    <Link href="/sign-up" target="_self" className="link">
+                        {t("SignUp")}
+                    </Link>
+                </div>
             </div>
-            <div>
-                <Label htmlFor="password">{t("Password")}</Label>
-                <Input id="password" name="password" type="password" required autoComplete="password"
-                       defaultValue={SignInDefaultValues.password}/>
-            </div>
-            <div>
-                <SignInButton />
-            </div>
-
-            {data && !data.success && (
-                <div className="text-center text-destructive">{data.message}</div>
-            )}
-
-            <div className="text-sm text-center text-muted-foreground">
-                {t("DontHaveAnAccount")}{" "}
-                <Link href="/sign-up" target="_self" className="link">
-                    {t("SignUp")}
-                </Link>
-            </div>
-
-        </div>
-    </form>
+        </form>
+    );
 };
 
 export default CredentialsSigninForm;

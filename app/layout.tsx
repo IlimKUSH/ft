@@ -6,6 +6,7 @@ import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from "@/lib/constants";
 import { ThemeProvider } from "next-themes";
 import {NextIntlClientProvider} from "next-intl";
 import {getLocale, getMessages} from "next-intl/server";
+import Providers from "./providers";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -35,8 +36,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <SpeedInsights />
+            <Providers>
+              {children}
+              <SpeedInsights />
+            </Providers>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

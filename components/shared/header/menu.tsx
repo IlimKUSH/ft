@@ -9,11 +9,6 @@ import { useTranslations } from "next-intl";
 
 const Menu = () => {
     const t = useTranslations();
-    // const [open, setOpen] = useState(false);
-
-    // const handleLinkClick = () => {
-    //     setOpen(false);
-    // };
     
     return (
       <div className="flex justify-end gap-3">

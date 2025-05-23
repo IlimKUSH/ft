@@ -26,6 +26,13 @@
   "ConfirmPassword": "Подтвердить пароль",
   "CreatingAccount": "Создание аккаунта...",
   "CreateAccount": "Создать аккаунт",
-  "AllRightsReserved": "Все права защищены"
-
+  "AllRightsReserved": "Все права защищены",
+  "Auth": {
+    "errors": {
+      "required": "Требуется email и пароль",
+      "invalidCredentials": "Неверный email или пароль",
+      "fetchUserFailed": "Не удалось получить данные пользователя",
+      "internal": "Произошла внутренняя ошибка"
+    }
+  }
 } 
