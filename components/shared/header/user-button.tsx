@@ -10,10 +10,10 @@ import {
     DropdownMenuItem
 } from "@/components/ui/dropdown-menu";
 import {signOutUser} from "@/lib/actions/user.actions";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 const UserButton = async () => {
-    const t = useTranslations();
+    const t = await getTranslations();
     const session = await auth();
 
     if (!session) {
