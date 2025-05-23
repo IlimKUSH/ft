@@ -4,8 +4,9 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Session } from "next-auth";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
-interface ExtendedSession extends Session {
+interface ISession extends Session {
     user: {
         id: string;
         name: string;
@@ -15,12 +16,15 @@ interface ExtendedSession extends Session {
     }
 }
 
-export const metadata: Metadata = {
-    title: "Profile",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations();
+    return {
+        title: t("Profile"),
+    };
+}
 
 async function getProfile() {
-    const session = await auth() as ExtendedSession | null;
+    const session = await auth() as ISession | null;
     
     if (!session || !session.user) {
         redirect("/sign-in");
@@ -41,6 +45,7 @@ async function getProfile() {
 }
 
 export default async function ProfilePage() {
+    const t = await getTranslations();
     const profile = await getProfile();
 
     return (
@@ -66,11 +71,11 @@ export default async function ProfilePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div>
-                        <h3 className="text-sm font-medium text-muted-foreground">Account Created</h3>
+                        <h3 className="text-sm font-medium text-muted-foreground">{t("AccountCreated")}</h3>
                         <p className="text-lg">{new Date(profile.dateOfCreation).toLocaleDateString()}</p>
                     </div>
                     <div>
-                        <h3 className="text-sm font-medium text-muted-foreground">Subscriptions</h3>
+                        <h3 className="text-sm font-medium text-muted-foreground">{t("Subscriptions")}</h3>
                         {profile.subscribes.length > 0 ? (
                             <ul className="list-disc list-inside">
                                 {profile.subscribes.map((subscribe: string, index: number) => (
@@ -78,12 +83,12 @@ export default async function ProfilePage() {
                                 ))}
                             </ul>
                         ) : (
-                            <p className="text-lg">No active subscriptions</p>
+                            <p className="text-lg">{t("NoActiveSubscriptions")}</p>
                         )}
                     </div>
                     {profile.support && (
                         <div>
-                            <h3 className="text-sm font-medium text-muted-foreground">Support</h3>
+                            <h3 className="text-sm font-medium text-muted-foreground">{t("Support")}</h3>
                             <p className="text-lg">{profile.support.text}</p>
                         </div>
                     )}

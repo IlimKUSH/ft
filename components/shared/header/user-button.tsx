@@ -10,15 +10,17 @@ import {
     DropdownMenuItem
 } from "@/components/ui/dropdown-menu";
 import {signOutUser} from "@/lib/actions/user.actions";
+import { useTranslations } from "next-intl";
 
 const UserButton = async () => {
+    const t = useTranslations();
     const session = await auth();
 
     if (!session) {
         return (
             <Button asChild>
                 <Link href="/sign-in">
-                    <UserIcon /> Sign in
+                    <UserIcon /> {t("SignIn")}
                 </Link>
             </Button>
         )
@@ -31,7 +33,7 @@ const UserButton = async () => {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <div className="flex items-center">
-                        <Button variant="ghost" className="relative w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-200">
+                        <Button variant="ghost" className="relative text-white w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-600">
                             {firstInitial}
                         </Button>
                     </div>
@@ -48,9 +50,9 @@ const UserButton = async () => {
                         </div>
                     </DropdownMenuLabel>
 
-                    <DropdownMenuItem asChild>
+                    <DropdownMenuItem asChild className="cursor-pointer">
                         <Link href="/profile" className="w-full py-4 px-2 h-4">
-                            Profile
+                            {t("Profile")}
                         </Link>
                     </DropdownMenuItem>
 
@@ -60,7 +62,7 @@ const UserButton = async () => {
                                 className='w-full py-4 px-2 h-4 justify-start'
                                 variant='ghost'
                             >
-                                Sign Out
+                                {t("SignOut")}
                             </Button>
                         </form>
                     </DropdownMenuItem>

@@ -1,0 +1,15 @@
+{
+  "Hello": "Привет",
+  "Home": "Главная",
+  "Chat": "Чат",
+  "ChatPlaceholder": "Введите сообщение...",
+  "SignIn": "Войти",
+  "SignOut": "Выйти",
+  "Profile": "Профиль",
+  "AccountCreated": "Аккаунт создан",
+  "Subscriptions": "Подписки",
+  "NoActiveSubscriptions": "Нет активных подписок",
+  "Support": "Поддержка",
+  "AllRightsReserved": "Все права защищены"
+
+} 

@@ -1,0 +1,14 @@
+{
+  "Hello": "Hello",
+  "Home": "Home",
+  "Chat": "Chat",
+  "ChatPlaceholder": "Enter your message...",
+  "SignIn": "Sign in",
+  "SignOut": "Sign out",
+  "Profile": "Profile",
+  "AccountCreated": "Account Created",
+  "Subscriptions": "Subscriptions",
+  "NoActiveSubscriptions": "No active subscriptions",
+  "Support": "Support",
+  "AllRightsReserved": "All Rights Reserved"
+} 
