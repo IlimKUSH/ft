@@ -8,8 +8,11 @@ import {auth} from "@/auth";
 import {redirect} from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-    title: "Sign In"
+export async function generateMetadata(): Promise<Metadata> {
+    const t = await getTranslations();
+    return {
+        title: t("SignIn")
+    }
 }
 
 const SignInPage = async (props: {
@@ -24,7 +27,6 @@ const SignInPage = async (props: {
     if (session) {
         return redirect(callbackUrl || "/");
     }
-
 
     return <div className="w-full max-w-md mx-auto">
         <Card>
