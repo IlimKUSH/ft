@@ -9,10 +9,12 @@ import {useActionState} from "react";
 import {signInWithCredentials} from "@/lib/actions/user.actions";
 import {useFormStatus} from "react-dom";
 import {useSearchParams} from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const CredentialsSigninForm = () => {
+    const t = useTranslations()
     const searchParams = useSearchParams()
-    const callbackUrl = searchParams.get("callbackUrl") ?? "/";
+    const callbackUrl = searchParams.get("callbackUrl") ?? "/profile";
 
     const [data, action] = useActionState(signInWithCredentials, {
         success: false,
@@ -20,10 +22,11 @@ const CredentialsSigninForm = () => {
     });
 
     const SignInButton = () => {
+        const t = useTranslations()
         const { pending } = useFormStatus()
 
         return <Button disabled={pending} className="w-full" variant="default">
-            { pending ? "Signing In..." : "Sign In" }
+            { pending ? t("SigningIn") : t("SignIn") }
         </Button>
     }
 
@@ -31,12 +34,12 @@ const CredentialsSigninForm = () => {
         <input type="hidden" name="callbackUrl" value={callbackUrl} />
         <div className="space-y-6">
             <div>
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("Email")}</Label>
                 <Input id="email" name="email" type="email" required autoComplete="email"
                        defaultValue={SignInDefaultValues.email}/>
             </div>
             <div>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("Password")}</Label>
                 <Input id="password" name="password" type="password" required autoComplete="password"
                        defaultValue={SignInDefaultValues.password}/>
             </div>
@@ -49,9 +52,9 @@ const CredentialsSigninForm = () => {
             )}
 
             <div className="text-sm text-center text-muted-foreground">
-                Don&apos;t have an account?{" "}
+                {t("DontHaveAnAccount")}{" "}
                 <Link href="/sign-up" target="_self" className="link">
-                    Sign Up
+                    {t("SignUp")}
                 </Link>
             </div>
 

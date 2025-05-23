@@ -12,7 +12,11 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
             password: formData.get("password"),
         })
 
-        await signIn("credentials", user);
+        const callbackUrl = formData.get("callbackUrl") as string;
+        await signIn("credentials", {
+            ...user,
+            redirectTo: callbackUrl || "/profile"
+        });
         return { success: true, message: "Signed in successfully" };
     } catch (e) {
         if (isRedirectError(e)) {
@@ -55,7 +59,8 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
         await signIn("credentials", {
             email: user.email,
             password: user.password,
-            token: token
+            token: token,
+            redirectTo: "/profile"
         });
 
         return { success: true, message: "Account created successfully" };

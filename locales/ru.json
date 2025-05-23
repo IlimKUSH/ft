@@ -10,6 +10,22 @@
   "Subscriptions": "Подписки",
   "NoActiveSubscriptions": "Нет активных подписок",
   "Support": "Поддержка",
+  "Note": "Примечание",
+  "Name": "Имя",
+  "Email": "Email",
+  "NoteText": "Используйте mock API reqres.in. Используйте предопределенные учетные данные:",
+  "EnterYourInformationBelowToSignUp": "Введите вашу информацию ниже для регистрации",
+  "EnterYourInformationBelowToSignIn": "Введите вашу информацию ниже для входа",
+  "AlreadyHaveAnAccount": "Уже есть аккаунт?",
+  "SignInToYourAccount": "Войти в свой аккаунт",
+  "SignInToYourAccountText": "Войдите в свой аккаунт для продолжения",
+  "DontHaveAnAccount": "Нет аккаунта?",
+  "SigningIn": "Вход в систему...",
+  "SignUp": "Зарегистрироваться",
+  "Password": "Пароль",
+  "ConfirmPassword": "Подтвердить пароль",
+  "CreatingAccount": "Создание аккаунта...",
+  "CreateAccount": "Создать аккаунт",
   "AllRightsReserved": "Все права защищены"
 
 } 
