@@ -2,7 +2,6 @@
 
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {GlobeIcon} from "lucide-react";
 import setLanguageValue from "@/hooks/set-language";
 import {useLocale} from "next-intl";
 

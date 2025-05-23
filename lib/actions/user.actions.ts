@@ -4,7 +4,6 @@ import {signInFormSchema, signUpFormSchema} from "@/lib/validators";
 import {signIn, signOut} from "@/auth";
 import {isRedirectError} from "next/dist/client/components/redirect-error";
 import {formatErrors} from "@/lib/utils";
-import { redirect } from "next/navigation";
 
 export async function signInWithCredentials(prevState: unknown, formData: FormData) {
     try {

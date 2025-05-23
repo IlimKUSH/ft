@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import ReactMarkdown from "react-markdown";
+import { useTranslations } from "next-intl";
 
 const MessageBubble = ({ message }: { message: Message }) => {
     return (
@@ -44,6 +45,7 @@ const MessageBubble = ({ message }: { message: Message }) => {
 };
 
 const ChatInterface = () => {
+    const t = useTranslations()
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -61,7 +63,6 @@ const ChatInterface = () => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
 
-        // Add user message
         addMessage(input, "user");
         setInput("");
         setIsLoading(true);
@@ -84,7 +85,7 @@ const ChatInterface = () => {
                 <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    placeholder="Type your message..."
+                    placeholder={t("ChatPlaceholder")}
                     className="flex-1"
                     disabled={isLoading}
                 />

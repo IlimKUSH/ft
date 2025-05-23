@@ -1,10 +1,15 @@
 {
   "Hello": "Привет",
-  "HomePage": {
-    "title": "Привет"
-  },
-  "chat": {
-    "placeholder": "Введите сообщение...",
-    "loading": "Ожидаем ответ с бэка"
-  }
+  "Home": "Главная",
+  "Chat": "Чат",
+  "ChatPlaceholder": "Введите сообщение...",
+  "SignIn": "Войти",
+  "SignOut": "Выйти",
+  "Profile": "Профиль",
+  "AccountCreated": "Аккаунт создан",
+  "Subscriptions": "Подписки",
+  "NoActiveSubscriptions": "Нет активных подписок",
+  "Support": "Поддержка",
+  "AllRightsReserved": "Все права защищены"
+
 } 
