@@ -12,6 +12,7 @@ import { APP_NAME } from '@/lib/constants';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import SignUpForm from './sign-up-form';
+import { getTranslations } from 'next-intl/server';
 
 export const metadata: Metadata = {
     title: 'Sign Up',
@@ -22,6 +23,7 @@ const SignUpPage = async (props: {
         callbackUrl: string;
     }>;
 }) => {
+    const t = await getTranslations();
     const { callbackUrl } = await props.searchParams;
 
     const session = await auth();
@@ -43,9 +45,9 @@ const SignUpPage = async (props: {
                             priority={true}
                         />
                     </Link>
-                    <CardTitle className='text-center'>Create Account</CardTitle>
+                    <CardTitle className='text-center'>{t("CreateAccount")}</CardTitle>
                     <CardDescription className='text-center'>
-                        Enter your information below to sign up
+                        {t("EnterYourInformationBelowToSignUp")}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className='space-y-4'>
